@@ -23,14 +23,14 @@ class jesterKing_CountTrisQuads(bpy.types.Operator):
     def execute(self, context):
         t = 0
         q = 0
-        for o in bpy.data.objects:
-            if o.selected and o.type=='MESH':
-                m = o.data
-                for f in m.faces:
-                    if len(f.verts)==3:
-                        t = t + 1
-                    else:
-                        q = q + 1
+        o = context.active_object
+        if o.selected and o.type=='MESH':
+            m = o.data
+            for f in m.faces:
+                if len(f.verts)==3:
+                    t = t + 1
+                else:
+                    q = q + 1
         
         self.report({'INFO'}, 'I counted in the active mesh: ' + str(t) + ' triangles and ' + str(q) + ' quads')
         
